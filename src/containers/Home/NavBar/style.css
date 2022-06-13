@@ -1,0 +1,29 @@
+.container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.head {
+    background-color: white;
+}
+
+.nav_bar {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.nav_bar h1 {
+    text-decoration: none;
+    color: black;
+    font-size: 35px;
+}
+
+.nav_bar div {
+    margin: auto 0;
+}
+
+.nav_bar a {
+    text-decoration: none;
+    color: black;
+}

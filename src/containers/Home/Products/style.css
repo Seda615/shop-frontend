@@ -1,0 +1,9 @@
+.products {
+    background-color: whitesmoke;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 40px;
+    box-sizing: border-box;
+}

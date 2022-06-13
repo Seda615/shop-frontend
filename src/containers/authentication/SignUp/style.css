@@ -1,0 +1,19 @@
+.signUp {
+    width: 300px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    height: 500px;
+}
+
+.signUp p {
+    width: 100%;
+}
+
+.signUp div {
+    width: 100%;
+}
+
+.signUp button {
+    width: 100%;
+}

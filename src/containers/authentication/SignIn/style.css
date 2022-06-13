@@ -1,0 +1,19 @@
+.signIn {
+    width: 300px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    height: 300px;
+}
+
+.signIn p {
+    width: 100%;
+}
+
+.signIn div {
+    width: 100%;
+}
+
+.signIn button {
+    width: 100%;
+}
