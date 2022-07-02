@@ -1,18 +1,18 @@
 import {Link, Outlet} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {Button} from "@mui/material";
-import {logOut} from "../../../features/auth/userSlice";
+import {Button, TextField} from "@mui/material";
+import {logOut} from "../../../features/auth/authSlice";
 import React from "react";
 import "./style.css";
 import {isLoggedInSelector} from "../../../features/selectors";
 
 const NavBar = () => {
-
     const isLoggedIn = useSelector(isLoggedInSelector);
     const dispatch = useDispatch();
 
     const signOut = () => {
-        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
         dispatch(logOut());
     }
 
@@ -23,6 +23,7 @@ const NavBar = () => {
                     <h1><Link to="/">Online Shop</Link></h1>
                     {isLoggedIn ?
                         <div>
+                            <Button><Link to="/order">Order</Link></Button>
                             <Button><Link to="/cart">Cart</Link></Button>
                             <Button onClick={signOut}>LogOut</Button>
                         </div> :

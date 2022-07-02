@@ -1,9 +1,9 @@
-import {loginAsync} from "../../../features/auth/userSlice";
+import {login} from "../../../features/auth/authSlice";
 import {TextField, Button} from '@mui/material';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {isLoggedInSelector, loginErrorSelector} from "../../../features/selectors";
+import {isLoggedInSelector, loginErrorSelector, tokenSelector} from "../../../features/selectors";
 import "./style.css"
 
 const SignIn = () => {
@@ -14,10 +14,14 @@ const SignIn = () => {
 
     const loggedIn = useSelector(isLoggedInSelector);
     const loginError = useSelector(loginErrorSelector);
+    const token = useSelector(tokenSelector);
+    const id = useSelector(state => state.user.user_id);
 
     useEffect(() => {
         if (loggedIn) {
-            localStorage.setItem('user', JSON.stringify(user));
+            console.log(loggedIn)
+            localStorage.setItem("token", token);
+            localStorage.setItem("id", id);
             navigate("../", { replace: true });
         }
     }, [loggedIn])
@@ -36,9 +40,9 @@ const SignIn = () => {
                 onChange={(e) => setUser({...user, email: e.target.value})}
             />
             <div>
-                {/*{loginError?.email &&*/}
+                {loginError?.email &&
                     <div>{loginError?.email}</div>
-                {/*}*/}
+                }
             </div>
             <TextField
                 value={user.password}
@@ -50,7 +54,7 @@ const SignIn = () => {
                 <div>{loginError.password}</div>
                 }
             </div>
-            <Button onClick={() => dispatch(loginAsync(user))} variant="contained">Sign In</Button>
+            <Button onClick={() => dispatch(login(user))} variant="contained">Sign In</Button>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import {registerAsync} from "../../../features/auth/userSlice";
+import {register} from "../../../features/auth/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useState, useEffect} from "react";
 import {Button, TextField} from "@mui/material";
@@ -80,7 +80,7 @@ const SignUp = () => {
                 onChange={(e) => changeUser(e)}
                 label="Confirm password"
             />
-            <Button onClick={() => dispatch(registerAsync(user))} variant="contained" color={"primary"}>Sign Up</Button>
+            <Button onClick={() => dispatch(register(user))} variant="contained" color={"primary"}>Sign Up</Button>
 
         </div>
     )

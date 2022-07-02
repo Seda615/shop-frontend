@@ -1,0 +1,17 @@
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 45px;
+}
+
+.cartItem img {
+    width: 100px
+}
+
+.cartItem p {
+    width: 300px
+}
+
+.cartItem button {
+    width: 100px
+}
