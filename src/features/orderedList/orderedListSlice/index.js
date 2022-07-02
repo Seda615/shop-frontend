@@ -1,4 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import Service from "../../../core/service/index";
+import {HOST} from "../../../core/constants"
 
 const initialState = {
     orders: [],
@@ -9,14 +11,10 @@ const initialState = {
 export const orderPostAsync = createAsyncThunk('orders/postOrders',
 
 async ({totalPrice, token, createdAt}) => {
-    return fetch("http://localhost:3001/api/order", {
-        method: "POST",
-        body: JSON.stringify({subTotal: totalPrice, token, createdAt}),
-        headers: {
-            Accept: 'application/json',
-            'Content-type': 'application/json'
-        }
-    })
+    const url = `${HOST}/order`;
+    const body = JSON.stringify({subTotal: totalPrice, token, createdAt});
+
+    return Service.request(url, "POST", body)
         .then(response => {
             if (response.ok) {
                 return response;
@@ -30,14 +28,8 @@ async ({totalPrice, token, createdAt}) => {
 export const orderGetAsync = createAsyncThunk('orders/getOrders',
 
     async (id) => {
-        return fetch(`http://localhost:3001/api/order/${id}`, {
-            method: "GET",
-            headers: {
-                Accept: 'application/json',
-                'Content-type': 'application/json'
-            }
-        })
-            .then(res => res.json())
+        const url = `${HOST}/order/${id}`;
+        return Service.request(url, "GET")
             .then(response => {
                 if (response.order) {
                     return response.order;

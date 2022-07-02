@@ -1,4 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import Service from "../../../core/service";
+import {HOST} from "../../../core/constants"
 
 const initialState = {
     products: [],
@@ -9,11 +11,10 @@ const initialState = {
 
 export const productsAsync = createAsyncThunk('products/fetchProducts',
     async ({page, limit, name, from, to}) => {
-        const response = await fetch(
-            `http://localhost:3001/api/products/?page=${page}&limit=${limit}&name=${name}&price_gt=${from}&price_lt=${to}`
-        );
 
-        return response.json();
+    const url = `${HOST}/products/?page=${page}&limit=${limit}&name=${name}&price_gt=${from}&price_lt=${to}`;
+
+        return Service.request(url, "GET")
     }
 );
 

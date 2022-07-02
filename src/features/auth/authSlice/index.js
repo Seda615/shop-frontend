@@ -1,4 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import Service from "../../../core/service";
+import {HOST} from "../../../core/constants"
 
 const initialState = {
     isLoggedIn: localStorage.getItem('token') ? true : false,
@@ -10,17 +12,12 @@ const initialState = {
 };
 
 export const login = createAsyncThunk("login/fetchLogin",
+
     async (user) => {
-        return  await fetch("http://localhost:3001/api/login",
-            {
-                method: "POST",
-                body: JSON.stringify(user),
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(res => res.json())
+
+        const url = `${HOST}/login`;
+
+        return Service.request(url, "POST", JSON.stringify(user))
             .then(response => {
                 if (response.token) {
                     return response;
@@ -32,16 +29,11 @@ export const login = createAsyncThunk("login/fetchLogin",
 );
 
 export const register = createAsyncThunk("register/fetchRegister",
+
     async (user) => {
-        return fetch("http://localhost:3001/api/register", {
-            method: "POST",
-            body: JSON.stringify(user),
-            headers: {
-                Accept: 'application/json',
-                'Content-type': 'application/json'
-            }
-        })
-            .then(res => res.json())
+
+        const url = `${HOST}/register`;
+        return Service.request(url, "POST", JSON.stringify(user))
             .then(response => {
                 if (response.token) {
                     return response;
